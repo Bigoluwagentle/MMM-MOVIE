@@ -3,9 +3,7 @@
     margin: 0;
     box-sizing: border-box;
 }
-body{
-    background-color: white;
-}
+
 section.loginsection{
     width: 40%;
     padding: 10px;
@@ -14,47 +12,50 @@ section.loginsection{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-form.loginform{
-    margin-top: 65px;
-    display: flex;
-    flex-direction: column;
-    width: 70%;
-}
-form.loginform > nav{
-    margin-bottom: 27px;
-    display: flex;
-    flex-direction: column;
-    padding-left: 20px;
+    form.loginform{
+        margin-top: 65px;
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+         > nav{
+            margin-bottom: 27px;
+            display: flex;
+            flex-direction: column;
+            padding-left: 20px;
+            label{
+                margin-bottom: 8px;
+                color: #34395E;
+                font-size: 13px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-weight: 500;
+            }
+        }
+    }
 }
 .nav{
     border-bottom: 1px solid rgba(0,0,0,0.1);
     padding: 0px 0px 22px 20px;
+    legend{
+        font-family: Arial, Helvetica, sans-serif;
+        color: #162168;
+        font-size: 16px;
+        font-weight: bolder;
+    }
 }
-legend{
-    font-family: Arial, Helvetica, sans-serif;
-    color: #162168;
-    font-size: 16px;
-    font-weight: bolder;
-}
-label{
-    margin-bottom: 8px;
-    color: #34395E;
-    font-size: 13px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: 500;
-}
-input{
+
+
+.nav ~ nav  input{
     padding: 10px;
     height: 42px;
     border:1px solid rgba(0,0,0,0.2);
     border-radius: 3px;
     outline: none;
+    color: black;
+    &:focus{
+        background-color: #555168;
+    }
 }
-input:focus{
-    background-color: #555168;
-}
-.aside{
+.loginform nav > .aside{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -69,7 +70,7 @@ input:focus{
         }
     }
 }
-button{
+.loginform nav > button{
     height: 45px;
     background: #134544;
     border: none;
@@ -80,9 +81,9 @@ button{
     box-shadow: 0px 4px 16px #555168;
     transition: background 1s;
     text-decoration: none;
-}
-button:hover{
-    background-color: #555168;
+    &:hover{
+        background-color: #555168;
+    }
 }
 form.loginform + p{
     font-size: 12px;

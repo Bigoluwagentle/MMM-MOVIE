@@ -1,42 +1,33 @@
 import React, { useEffect, useState } from "react";
-import "./Dashboard.css";
+import "./Sho.css";
 import NavBar from "../Aside/NavBar";
 import { data, Link } from "react-router-dom";
 const API_KEY = "082d7edebad5889af817afdc3faceee4";
 const BASE_URL = "https://api.themoviedb.org/3";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-function Dashboard() {
+function Sho() {
   const userName = sessionStorage.getItem("username");
-  const [movies, setMovies] = useState([]);
+  const [popular, setPopular] = useState([]);
   const [query, setQuery] = useState("");
   const [trailerUrl, setTrailerUrl] = useState(null);
   useEffect(() => {
     fetchMovies(`${BASE_URL}/movie/popular?api_key=${API_KEY}`);
   }, []);
-
   const fetchMovies = async (url) => {
     try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setMovies(data.results);
-      // console.log(data.results[0].popularity);
-      function checkpopularity(){
+    const response = await fetch(url);
+    const data = await response.json();
+    function checkpopularity() {
         const check = data.results;
-        check.map((che) => {
-          if(che.popularity >= 400){
-            console.log(che.popularity);
-          }
-          
-          // if()
-          
-        })
-      }
-      checkpopularity();
-    } catch (error) {
-      console.error("Fetch error:", error);
+        const filtered = check.filter((che) => che.popularity >= 300);
+        setPopular(filtered);
     }
-  };
+    checkpopularity()
+    } catch (error) {
+        console.error("Fetch error:", error);
+    }
+};
   
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -85,12 +76,12 @@ function Dashboard() {
   };
 
   return (
-    <div className="mobile">
+    <div>
       <div id="all-movie-container">
         <NavBar/>
         <div className="all-movie-container">
           <header>
-          <h1>🎬 MMM MOVIE</h1>
+          <h1>🎬 MMMS MOVIE</h1>
           <form onSubmit={handleSubmit} id="search-form">
             <input
               type="text"
@@ -117,35 +108,32 @@ function Dashboard() {
           </header>
 
           <main id="movie-container">
-            {movies.length === 0 ? (
-              <p>No results found.</p>
-            ) : (
-              movies.map((movie) => (
-                <div className="movie-card" key={movie.id}>
-                  <img
-                    src={
-                      movie.poster_path
-                        ? IMG_URL + movie.poster_path
-                        : "https://via.placeholder.com/500x750"
-                    }
-                    alt={movie.title}
-                  />
-                  <div className="movie-info">
-                    <div className="movie-title">{movie.title}</div>
-                    <div className="movie-overview">
-                      {movie.overview || "No description available."}
+            {popular.length === 0 ? (
+                <p>No results found.</p>
+                ) : (
+                popular.map((movie) => (
+                    <div className="movie-card" key={movie.id}>
+                    <img
+                        src={
+                        movie.poster_path
+                            ? IMG_URL + movie.poster_path
+                            : "https://via.placeholder.com/500x750"
+                        }
+                        alt={movie.title}
+                    />
+                    <div className="movie-info">
+                        <div className="movie-title">{movie.title}</div>
+                        <div className="movie-overview">
+                        {movie.overview || "No description available."}
+                        </div>
+                        <button className="trailer-btn" onClick={() => showTrailer(movie.id)}>
+                        🎬 Watch Trailer
+                        </button>
                     </div>
-                    <button
-                      className="trailer-btn"
-                      onClick={() => showTrailer(movie.id)}
-                    >
-                      🎬 Watch Trailer
-                    </button>
-                  </div>
-                  <marquee>You are Welcome to Money Must be Made Movie (MMM Movie)</marquee>
-                </div>
-              ))
-            )}
+                    <marquee>You are Welcome to Money Must be Made Movie (MMM Movie)</marquee>
+                    </div>
+                ))
+                )}
           </main>
 
           {trailerUrl && (
@@ -165,9 +153,12 @@ function Dashboard() {
         </div>
         )}
         </div>
+        
       </div>
+      
+
     </div>
   );
 }
 
-export default Dashboard;
+export default Sho;
