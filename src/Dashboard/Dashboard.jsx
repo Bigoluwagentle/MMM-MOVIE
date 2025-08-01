@@ -20,19 +20,7 @@ function Dashboard() {
       const response = await fetch(url);
       const data = await response.json();
       setMovies(data.results);
-      // console.log(data.results[0].popularity);
-      function checkpopularity(){
-        const check = data.results;
-        check.map((che) => {
-          if(che.popularity >= 400){
-            console.log(che.popularity);
-          }
-          
-          // if()
-          
-        })
-      }
-      checkpopularity();
+      console.log(data.results);
     } catch (error) {
       console.error("Fetch error:", error);
     }
@@ -52,7 +40,6 @@ function Dashboard() {
     console.log(movieId);
     console.log("Trailer API Response:", data.results);
 
-    // Find a video from YouTube that is a trailer or teaser
     const trailer = data.results.find(
       (video) =>
         video.site === "YouTube" &&
@@ -169,5 +156,5 @@ function Dashboard() {
     </div>
   );
 }
-
+// https://youtu.be/gBRWe9InEEg?si=R9bXEucj_tyVIRKR
 export default Dashboard;

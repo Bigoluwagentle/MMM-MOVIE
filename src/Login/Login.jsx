@@ -19,7 +19,6 @@ function Login(){
         
         if (validUser) { 
             document.getElementById("link").click();
-            alert("login succussful");
         } else {
             alert("Invalid login details.");
         } 

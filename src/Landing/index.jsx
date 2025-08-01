@@ -42,27 +42,54 @@ function Landing() {
   return (
     <div>
       <Link to="/login" id="logine"></Link>
-      <header>
-        <h1 title="Money Must be Made">🎬 MMM MOVIE</h1>
-        <form onSubmit={handleSubmit} id="search-form">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search for a movie..."
-            id="search-input"
-          />
-          <button type="submit"><i class="fa-regular fa-magnifying-glass"></i> Search</button>
-        </form>
+      <section id="LandingHeader">
+        <header>
+          <h1 title="Money Must be Made">🎬 MMM MOVIE</h1>
+          <a href="#movie-container">Movies</a>
+          <form onSubmit={handleSubmit} id="search-form">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search for a movie..."
+              id="search-input"
+            />
+            <i class="fa-solid fa-magnifying-glass" style={{paddingRight: "10px", cursor: "pointer"}}></i>
+          </form>
+          <nav>
+              <button onClick={() => {
+                document.querySelector("#login").click();
+              }}><i class="fa-solid fa-right-to-bracket"></i> Get Started</button>
+              <Link to="/login" id="login"></Link>
+          </nav>
+        </header>
         <nav>
-            <button onClick={() => {
-              document.querySelector("#login").click();
-            }}><i class="fa-solid fa-right-to-bracket"></i> Login</button>
-            <Link to="/login" id="login"></Link>
+          <h1>Watch the Best Movie Here!</h1>
+          <p>Thousands of movie in one place. Unlimited entertainment</p>
         </nav>
-      </header>
+        <aside>
+          <button><i class="fa-solid fa-film"></i> Watch Anywhere</button>
+          <button><i class="fa-solid fa-ban"></i> No Ads</button>
+          <button> <i class="fa-solid fa-film"></i> Watch Trailer</button>
+        </aside>
+      </section>
+      
 
       <main id="movie-container">
+        <div className="movie-card" id="free">
+          <h4>Free</h4>
+          <h3>Free</h3>
+          <li>Limited access to movie</li>
+          <li>Watch on any device</li>
+          <button>Get Started</button>
+        </div>
+        <div className="movie-card" id="free">
+          <h4>Premius</h4>
+          <h3>12.98/month</h3>
+          <li>Unlimited access to movie</li>
+          <li>Download to any device</li>
+          <button>Get Started</button>
+        </div>
         {movies.length === 0 ? (
           <p>No results found.</p>
         ) : (
@@ -77,10 +104,7 @@ function Landing() {
                 alt={movie.title}
               />
               <div className="movie-info">
-                <div className="movie-title">{movie.title}</div>
-                <div className="movie-overview">
-                  {movie.overview || "No description available."}
-                </div>
+                <div className="movie-title" style={{color: "white"}}>{movie.title}</div>
                 <button
                   className="trailer-btn"
                   onClick={() => showTrailer(movie.id)}
@@ -88,7 +112,6 @@ function Landing() {
                   🎬 Watch Trailer
                 </button>
               </div>
-             <marquee>You are Welcome to Money Must be Made Movie (MMM Movie)</marquee>
             </div>
           ))
         )}
